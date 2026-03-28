@@ -9,7 +9,7 @@ import Applications from '../pages/Applications.vue'
 const routes = [
   { path: '/',            component: JobList },
   { path: '/login',       component: Login },
-  { path: '/post-job',    component: PostJob,      meta: { requiresAuth: true, role: 'company' } },
+  { path: '/post-job', component: PostJob, meta: { requiresAuth: true } },
   { path: '/applications',component: Applications, meta: { requiresAuth: true, role: 'admin' } },
 ]
 

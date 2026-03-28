@@ -15,7 +15,7 @@ const logout = async () => {
   <div>
     <nav>
       <router-link to="/">Jobs</router-link>
-      <router-link v-if="auth.isCompany" to="/post-job">Post a Job</router-link>
+      <router-link v-if="auth.isCompany || auth.isAdmin" to="/post-job">Post a Job</router-link>
       <router-link v-if="auth.isAdmin" to="/applications">Applications</router-link>
       <span v-if="auth.isLoggedIn">
         Hello, {{ auth.user.name }}

@@ -17,6 +17,10 @@ class JobController extends Controller
 
     public function store(Request $request): JsonResponse
     {
+        if (!$request->user()->isAdmin() && !$request->user()->isCompany()) {
+            return response()->json(['message' => 'Unauthorized'], 403);
+        }
+
         $request->validate([
             'title'        => ['required', 'string', 'max:255'],
             'company_name' => ['required', 'string', 'max:255'],
