@@ -3,23 +3,53 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Job;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $admin = User::create([
+            'name'     => 'Admin User',
+            'email'    => 'admin@test.com',
+            'password' => Hash::make('password'),
+            'role'     => 'admin',
+        ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $company = User::create([
+            'name'     => 'Tech Company',
+            'email'    => 'company@test.com',
+            'password' => Hash::make('password'),
+            'role'     => 'company',
+        ]);
+
+        $applicant = User::create([
+            'name'     => 'Juan dela Cruz',
+            'email'    => 'juan@test.com',
+            'password' => Hash::make('password'),
+            'role'     => 'applicant',
+        ]);
+
+        Job::create([
+            'user_id'      => $company->id,
+            'title'        => 'Laravel Developer',
+            'company_name' => 'Tech Company',
+            'location'     => 'Manila',
+            'description'  => 'We need a skilled Laravel developer.',
+            'salary'       => 50000,
+            'status'       => 'open',
+        ]);
+
+        Job::create([
+            'user_id'      => $company->id,
+            'title'        => 'Vue.js Developer',
+            'company_name' => 'Tech Company',
+            'location'     => 'Remote',
+            'description'  => 'We need a Vue.js frontend developer.',
+            'salary'       => 45000,
+            'status'       => 'open',
         ]);
     }
 }
